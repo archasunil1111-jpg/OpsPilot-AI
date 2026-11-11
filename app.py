@@ -1,5 +1,6 @@
 
 import streamlit as st
+import ollama
 
 st.set_page_config(
     page_title="OpsPilot AI",
@@ -20,6 +21,7 @@ st.divider()
 st.header("Incident Submission")
 
 with st.form("incident_form"):
+
     incident_title = st.text_input(
         "Incident Title",
         placeholder="Example: Website returning 503 error"
@@ -40,25 +42,73 @@ with st.form("incident_form"):
         ["Low", "Medium", "High", "Critical"]
     )
 
-    submitted = st.form_submit_button("Submit Incident")
+    submitted = st.form_submit_button("Analyse Incident")
 
 if submitted:
+
     if incident_title.strip() and description.strip():
+
         st.success("Incident details captured successfully!")
 
-        st.subheader("Submitted Incident")
-        st.write("**Title:**", incident_title)
-        st.write("**Description:**", description)
-        st.write("**Affected Service:**", affected_service)
-        st.write("**Business Impact:**", impact)
+        prompt = f"""
+        You are an IT incident analysis assistant.
 
-        st.info(
-            "AI-powered incident analysis will be added "
-            "in the next development stage."
-        )
+        Analyse the following incident.
+
+        Incident Title: {incident_title}
+        Description: {description}
+        Affected Service: {affected_service}
+        Business Impact: {impact}
+
+        Provide your response using these sections:
+
+        1. Incident Summary
+        2. Incident Category
+        3. Severity Assessment
+        4. Three Possible Technical Causes
+        5. Troubleshooting Steps
+        6. Prevention Recommendations
+
+        Important:
+        - Explain your reasoning.
+        - Do not claim possible causes are confirmed facts.
+        - Do not recommend unsafe automatic system changes.
+        - Mention when additional technical evidence is needed.
+        """
+
+        st.header("AI Incident Analysis")
+
+        with st.spinner("Qwen AI is analysing the incident..."):
+
+            try:
+                response = ollama.chat(
+                    model="qwen2.5:3b",
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": prompt
+                        }
+                    ]
+                )
+
+                analysis = response["message"]["content"]
+
+                st.markdown(analysis)
+
+            except Exception as e:
+
+                st.error(
+                    "Unable to connect to Ollama. "
+                    "Please check whether Ollama is running."
+                )
+
+                st.caption(str(e))
+
     else:
-        st.warning("Please enter both the incident title and description.")
+        st.warning(
+            "Please enter both the incident title and description."
+        )
 
 st.divider()
 
-st.caption("OpsPilot AI | Project Prototype | Version 1.0")
+st.caption("OpsPilot AI | Local AI Prototype | Version 1.0")
