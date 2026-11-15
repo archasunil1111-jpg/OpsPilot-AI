@@ -181,6 +181,27 @@ The prototype includes three troubleshooting documents:
 - **Knowledge Base:** Provides access to the local troubleshooting documents.
 - **About:** Explains the project workflow, technologies, and limitations.
 
+## Project Screenshots
+
+### 1. Dashboard
+![Dashboard Overview](Screenshots/01-Dashboard/01-dashboard-overview.png)
+
+![Dashboard Activity and Recent Incidents](Screenshots/01-Dashboard/02-dashboard-activity-and-recent-incidents.png)
+
+### 2. New Incident
+![New Incident Input](Screenshots/02-New-Incident/01-new-incident-input.png)
+
+![Incident Analysis Report](Screenshots/02-New-Incident/02-new-incident-analysis-report.png)
+
+### 3. Incident History
+![Incident History](Screenshots/03-Incident-History/incident-history.png)
+
+### 4. Knowledge Base
+![Knowledge Base](Screenshots/04-Knowledge-Base/knowledge_base.png)
+
+### 5. About
+![About OpsPilot AI](Screenshots/05-About/about_project.png)
+
 ## Testing
 
 The prototype has been tested using three sample incident scenarios:
