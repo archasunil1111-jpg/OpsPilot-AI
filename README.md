@@ -1,5 +1,5 @@
 # OpsPilot AI
-### AI-Powered IT Incident Diagnosis and Resolution Assistant
+### AI-Powered IT Incident Diagnosis and Troubleshooting Assistant
 
 OpsPilot AI is a local AI-assisted application designed to help IT teams organise incident information, retrieve relevant troubleshooting knowledge, explore possible technical causes, and plan structured investigation steps.
 
